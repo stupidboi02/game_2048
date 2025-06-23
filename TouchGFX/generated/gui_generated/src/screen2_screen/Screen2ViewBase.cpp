@@ -28,11 +28,11 @@ Screen2ViewBase::Screen2ViewBase() :
     back_bt.setPosition(12, 8, 56, 33);
     add(back_bt);
 
-    stop_bt.setBoxWithBorderPosition(0, 0, 69, 24);
-    stop_bt.setBorderSize(5);
-    stop_bt.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
-    stop_bt.setPosition(11, 49, 69, 24);
-    add(stop_bt);
+    buttonPause.setBoxWithBorderPosition(0, 0, 69, 24);
+    buttonPause.setBorderSize(5);
+    buttonPause.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    buttonPause.setPosition(11, 49, 69, 24);
+    add(buttonPause);
 
     back_tx.setXY(24, 17);
     back_tx.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -40,11 +40,11 @@ Screen2ViewBase::Screen2ViewBase() :
     back_tx.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NZLA));
     add(back_tx);
 
-    stop_tx.setXY(18, 48);
-    stop_tx.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
-    stop_tx.setLinespacing(0);
-    stop_tx.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4E9F));
-    add(stop_tx);
+    pause_tx.setXY(15, 47);
+    pause_tx.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    pause_tx.setLinespacing(0);
+    pause_tx.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4E9F));
+    add(pause_tx);
 
     container00.setPosition(14, 84, 50, 50);
     add(container00);
@@ -262,7 +262,7 @@ Screen2ViewBase::Screen2ViewBase() :
     scoreText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_CE6J));
     add(scoreText);
 
-    highscoreText.setPosition(120, 62, 116, 12);
+    highscoreText.setPosition(120, 61, 116, 12);
     highscoreText.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     highscoreText.setLinespacing(0);
     highscoreText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_01P9));
@@ -288,25 +288,24 @@ Screen2ViewBase::Screen2ViewBase() :
     gameOverText.setVisible(false);
     add(gameOverText);
 
-    PauseMenuContainer.setPosition(2, 0, 240, 320);
-    PauseMenuContainer.setVisible(false);
+    PauseMenuContainer.setPosition(0, 0, 240, 320);
     box35.setPosition(0, -1, 240, 320);
     box35.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     box35.setAlpha(128);
     box35.setVisible(false);
     PauseMenuContainer.add(box35);
 
-    Resume.setXY(0, 132);
-    Resume.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_PRESSED_ID));
-    PauseMenuContainer.add(Resume);
+    buttonResume.setXY(0, 132);
+    buttonResume.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_PRESSED_ID));
+    PauseMenuContainer.add(buttonResume);
 
-    Save.setXY(0, 203);
-    Save.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_PRESSED_ID));
-    PauseMenuContainer.add(Save);
+    buttonSave.setXY(0, 204);
+    buttonSave.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_PRESSED_ID));
+    PauseMenuContainer.add(buttonSave);
 
-    Menu.setXY(0, 269);
-    Menu.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_PRESSED_ID));
-    PauseMenuContainer.add(Menu);
+    buttonLoad.setXY(0, 269);
+    buttonLoad.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_PRESSED_ID));
+    PauseMenuContainer.add(buttonLoad);
 
     textArea1.setXY(77, 145);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(33, 31, 31));
@@ -333,10 +332,6 @@ Screen2ViewBase::Screen2ViewBase() :
     PauseMenuContainer.add(textArea1_1_1);
 
     add(PauseMenuContainer);
-
-    Stop.setXY(345, 145);
-    Stop.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_PRESSED_ID));
-    add(Stop);
 }
 
 Screen2ViewBase::~Screen2ViewBase()

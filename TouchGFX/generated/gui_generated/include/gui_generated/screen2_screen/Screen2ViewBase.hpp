@@ -46,9 +46,9 @@ protected:
     touchgfx::Box box34;
     touchgfx::Box box1;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  back_bt;
-    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  stop_bt;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  buttonPause;
     touchgfx::TextArea back_tx;
-    touchgfx::TextArea stop_tx;
+    touchgfx::TextArea pause_tx;
     touchgfx::Container container00;
     touchgfx::Container container10;
     touchgfx::Container container11;
@@ -104,14 +104,13 @@ protected:
     touchgfx::TextArea gameOverText;
     touchgfx::Container PauseMenuContainer;
     touchgfx::Box box35;
-    touchgfx::Button Resume;
-    touchgfx::Button Save;
-    touchgfx::Button Menu;
+    touchgfx::Button buttonResume;
+    touchgfx::Button buttonSave;
+    touchgfx::Button buttonLoad;
     touchgfx::TextArea textArea1;
     touchgfx::TextArea textArea1_2;
     touchgfx::TextArea textArea1_1;
     touchgfx::TextArea textArea1_1_1;
-    touchgfx::Button Stop;
 
     /*
      * Wildcard Buffers

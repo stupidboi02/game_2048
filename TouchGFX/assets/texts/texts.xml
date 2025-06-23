@@ -6,20 +6,20 @@
   <Texts>
     <TextGroup Id="Group1" />
     <TextGroup Id="Unsorted">
-      <Text Id="__SingleUse_4E9F" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">STOP&#10;</Translation>
-      </Text>
-      <Text Id="__SingleUse_YMOU" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">PAUSED</Translation>
-      </Text>
       <Text Id="__SingleUse_RXV0" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">MENU</Translation>
+        <Translation Language="GB">LOAD</Translation>
       </Text>
       <Text Id="__SingleUse_0OQ3" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">SAVE</Translation>
       </Text>
       <Text Id="__SingleUse_Q7BL" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">RESUME</Translation>
+      </Text>
+      <Text Id="__SingleUse_4E9F" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">pause</Translation>
+      </Text>
+      <Text Id="__SingleUse_YMOU" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">PAUSED</Translation>
       </Text>
       <Text Id="__SingleUse_85HI" Alignment="Left" TypographyId="Large">
         <Translation Language="GB">YOU LOSE</Translation>

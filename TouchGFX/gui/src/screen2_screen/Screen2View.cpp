@@ -5,16 +5,19 @@
 #include <math.h>
 #include <string.h>
 #include <touchgfx/Color.hpp>
+#include <gui/common/FrontendApplication.hpp> // Để chuyển màn hình
 
 extern osMessageQueueId_t myQueue01Handle;
 extern int highScore;
 
 #define FLASH_SECTOR_SAVE      FLASH_SECTOR_11
 #define FLASH_SECTOR_ADDRESS   0x080F0000
-
+#define FLASH_GAME_STATE_ADDRESS    0x080F0400 // Địa chỉ mới cho GameState
 
 Screen2View::Screen2View()
 {
+	 :buttonCallback(this, &Screen2View::buttonCallbackHandler),
+	 isGamePaused(false) // Khởi tạo trạng thái game không tạm dừng
 }
 colortype getColorForValue(int value)
 {
@@ -72,10 +75,93 @@ void Screen2View::loadHighScoreFromFlash()
     }
 }
 
+void Screen2View::saveGameToFlash()
+{
+    HAL_FLASH_Unlock();
+
+    // Xóa sector trước khi ghi trạng thái game
+    FLASH_EraseInitTypeDef erase;
+    uint32_t sectorError;
+    erase.TypeErase    = FLASH_TYPEERASE_SECTORS;
+    erase.VoltageRange = FLASH_VOLTAGE_RANGE_3;
+    erase.Sector       = FLASH_SECTOR_SAVE; // Giả sử cùng sector hoặc một sector khác nếu cần
+    erase.NbSectors    = 1;
+    // Cần đảm bảo rằng việc xóa này không ảnh hưởng đến HighScore nếu chúng ở cùng sector
+    if (HAL_FLASHEx_Erase(&erase, &sectorError) != HAL_OK)
+    {
+        HAL_FLASH_Lock();
+        return;
+    }
+
+    GameState gameState;
+    memcpy(gameState.tickCount, tickCount, sizeof(tickCount));
+    gameState.score = score;
+    gameState.isGamePaused = isGamePaused;
+
+    // Ghi từng phần của GameState vào Flash
+    uint32_t address = FLASH_GAME_STATE_ADDRESS;
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, address, gameState.tickCount[i][j]);
+            address += 4;
+        }
+    }
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, address, (uint32_t)gameState.score);
+    address += 4;
+    HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, address, (uint32_t)gameState.isGamePaused);
+
+    HAL_FLASH_Lock();
+}
+void Screen2View::loadGameFromFlash()
+{
+    uint32_t address = FLASH_GAME_STATE_ADDRESS;
+    GameState loadedGameState;
+    // Đọc từng phần của GameState từ Flash
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            loadedGameState.tickCount[i][j] = *(uint32_t*)address;
+            address += 4;
+        }
+    }
+    loadedGameState.score = (int)*(uint32_t*)address;
+    address += 4;
+    loadedGameState.isGamePaused = (bool)*(uint32_t*)address;
+
+    // Kiểm tra dữ liệu
+    bool isValid = false;
+    for(int i = 0; i < 4; ++i) {
+        for(int j = 0; j < 4; ++j) {
+            if(loadedGameState.tickCount[i][j] != 0xFFFFFFFF) {
+                isValid = true;
+                break;
+            }
+        }
+        if(isValid) break;
+    }
+
+    if (isValid) { // Nếu dữ liệu hợp lệ
+        memcpy(tickCount, loadedGameState.tickCount, sizeof(tickCount));
+        score = loadedGameState.score;
+        isGamePaused = loadedGameState.isGamePaused;
+    } else {
+        // Nếu không hợp lệ => game mới
+        initGame();
+    }
+    updateUI(); // Cập nhật UI sau khi load
+}
 void Screen2View::setupScreen()
 {
     Screen2ViewBase::setupScreen();
     loadHighScoreFromFlash();
+
+    buttonPause.setClickedCallback(buttonCallback);
+    buttonResume.setClickedCallback(buttonCallback);
+    buttonSave.setClickedCallback(buttonCallback);
+    buttonLoad.setClickedCallback(buttonCallback);
+
+    // Đảm bảo ẩn popup ban đầu
+    pauseMenuContainer.setVisible(false);
+
     initGame();
 }
 
@@ -297,7 +383,11 @@ void Screen2View::restart()
 
 void Screen2View::tickEvent()
 {
+	if (isGamePaused) { // Nếu game đang tạm dừng, không xử lý input
+    return;
+	}
     uint8_t res;
+
     if (osMessageQueueGetCount(myQueue01Handle) > 0)
     {
         osMessageQueueGet(myQueue01Handle, &res, NULL, osWaitForever);
@@ -336,4 +426,49 @@ bool Screen2View::isGameOver()
         }
     saveHighScoreToFlash();
     return true;
+}
+void Screen2View::buttonCallbackHandler(const touchgfx::AbstractButton& src)
+{
+    if (&src == &buttonPause) {
+        handlePauseButtonPressed();
+    } else if (&src == &buttonResume) {
+        handleResumeButtonPressed();
+    } else if (&src == &buttonSave) {
+        handleSaveGameButtonPressed();
+    } else if (&src == &buttonLoad) {
+        handleLoadButtonPressed();
+    }
+}
+
+void Screen2View::handlePauseButtonPressed()
+{
+    // 1. Hiển thị popup tạm dừng
+    pauseMenuContainer.setVisible(true);
+    pauseMenuContainer.invalidate(); // Yêu cầu TouchGFX vẽ lại vùng popup
+
+    // 2. Tạm dừng game logic
+    isGamePaused = true;
+}
+
+void Screen2View::handleResumeButtonPressed()
+{
+    // 1. Ẩn popup tạm dừng
+    pauseMenuContainer.setVisible(false);
+    pauseMenuContainer.invalidate();
+
+    // 2. Tiếp tục game logic
+    isGamePaused = false;
+}
+
+void Screen2View::handleSaveGameButtonPressed()
+{
+    saveGameToFlash();
+    // Có thể hiển thị một thông báo "Game Saved!"
+}
+
+void Screen2View::handleLoadButtonPressed()
+{
+    loadGameFromFlash();
+    isGamePaused = true //pause game
+    handleResumeButtonPressed(); // Đảm bảo ẩn menu tạm dừng sau khi load
 }
