@@ -12,6 +12,7 @@
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/widgets/Button.hpp>
 
 class Screen2ViewBase : public touchgfx::View<Screen2Presenter>
 {
@@ -45,7 +46,9 @@ protected:
     touchgfx::Box box34;
     touchgfx::Box box1;
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  back_bt;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  stop_bt;
     touchgfx::TextArea back_tx;
+    touchgfx::TextArea stop_tx;
     touchgfx::Container container00;
     touchgfx::Container container10;
     touchgfx::Container container11;
@@ -99,6 +102,16 @@ protected:
     touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  restart_bt;
     touchgfx::TextArea restart_tx;
     touchgfx::TextArea gameOverText;
+    touchgfx::Container PauseMenuContainer;
+    touchgfx::Box box35;
+    touchgfx::Button Resume;
+    touchgfx::Button Save;
+    touchgfx::Button Menu;
+    touchgfx::TextArea textArea1;
+    touchgfx::TextArea textArea1_2;
+    touchgfx::TextArea textArea1_1;
+    touchgfx::TextArea textArea1_1_1;
+    touchgfx::Button Stop;
 
     /*
      * Wildcard Buffers

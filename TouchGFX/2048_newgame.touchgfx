@@ -118,13 +118,61 @@
             ]
           },
           {
+            "Type": "FlexButton",
+            "Name": "stop_bt",
+            "X": 11,
+            "Y": 49,
+            "Width": 69,
+            "Height": 24,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 69,
+                "Height": 24,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
             "Type": "TextArea",
             "Name": "back_tx",
-            "X": 18,
-            "Y": 14,
-            "Width": 46,
-            "Height": 20,
+            "X": 24,
+            "Y": 17,
+            "Width": 33,
+            "Height": 24,
             "TextId": "__SingleUse_NZLA",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "stop_tx",
+            "X": 18,
+            "Y": 48,
+            "Width": 65,
+            "Height": 40,
+            "TextId": "__SingleUse_4E9F",
             "TextRotation": "0",
             "AutoSize": true
           },
@@ -749,6 +797,129 @@
               "Red": 237
             },
             "AutoSize": true
+          },
+          {
+            "Type": "Container",
+            "Name": "PauseMenuContainer",
+            "X": 2,
+            "Width": 240,
+            "Height": 320,
+            "Visible": false,
+            "Components": [
+              {
+                "Type": "Box",
+                "Name": "box35",
+                "Y": -1,
+                "Width": 240,
+                "Height": 320,
+                "Visible": false,
+                "Alpha": 128
+              },
+              {
+                "Type": "Button",
+                "Name": "Resume",
+                "Y": 132,
+                "Width": 240,
+                "Height": 50,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_50_medium_rounded_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_50_medium_rounded_normal.png",
+                "Preset": "alternate_theme\\presets\\button\\regular\\height_50\\medium_rounded_normal.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "Save",
+                "Y": 203,
+                "Width": 240,
+                "Height": 50,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_50_medium_rounded_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_50_medium_rounded_normal.png",
+                "Preset": "alternate_theme\\presets\\button\\regular\\height_50\\medium_rounded_normal.json"
+              },
+              {
+                "Type": "Button",
+                "Name": "Menu",
+                "Y": 269,
+                "Width": 240,
+                "Height": 50,
+                "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_50_medium_rounded_pressed.png",
+                "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_50_medium_rounded_normal.png",
+                "Preset": "alternate_theme\\presets\\button\\regular\\height_50\\medium_rounded_normal.json"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "textArea1",
+                "X": 77,
+                "Y": 145,
+                "Width": 86,
+                "Height": 20,
+                "TextId": "__SingleUse_Q7BL",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 33,
+                  "Green": 31,
+                  "Blue": 31
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "textArea1_2",
+                "X": 74,
+                "Y": 50,
+                "Width": 93,
+                "Height": 27,
+                "TextId": "__SingleUse_YMOU",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 13,
+                  "Green": 12,
+                  "Blue": 12
+                }
+              },
+              {
+                "Type": "TextArea",
+                "Name": "textArea1_1",
+                "X": 93,
+                "Y": 216,
+                "Width": 55,
+                "Height": 20,
+                "TextId": "__SingleUse_0OQ3",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 33,
+                  "Green": 31,
+                  "Blue": 31
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "textArea1_1_1",
+                "X": 90,
+                "Y": 282,
+                "Width": 60,
+                "Height": 20,
+                "TextId": "__SingleUse_RXV0",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 33,
+                  "Green": 31,
+                  "Blue": 31
+                },
+                "AutoSize": true
+              }
+            ]
+          },
+          {
+            "Type": "Button",
+            "Name": "Stop",
+            "X": 345,
+            "Y": 145,
+            "Width": 100,
+            "Height": 36,
+            "Pressed": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_pressed.png",
+            "Released": "__generated\\alternate_theme_images_widgets_button_regular_height_36_tiny_rounded_normal.png",
+            "Preset": "alternate_theme\\presets\\button\\regular\\height_36\\tiny_rounded_normal.json"
           }
         ],
         "Interactions": [

@@ -4,6 +4,7 @@
 #include <gui_generated/screen2_screen/Screen2ViewBase.hpp>
 #include <touchgfx/Color.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
+#include <images/BitmapDatabase.hpp>
 
 Screen2ViewBase::Screen2ViewBase() :
     flexButtonCallback(this, &Screen2ViewBase::flexButtonCallbackHandler)
@@ -27,11 +28,23 @@ Screen2ViewBase::Screen2ViewBase() :
     back_bt.setPosition(12, 8, 56, 33);
     add(back_bt);
 
-    back_tx.setXY(18, 14);
+    stop_bt.setBoxWithBorderPosition(0, 0, 69, 24);
+    stop_bt.setBorderSize(5);
+    stop_bt.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 102, 153), touchgfx::Color::getColorFromRGB(0, 153, 204), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    stop_bt.setPosition(11, 49, 69, 24);
+    add(stop_bt);
+
+    back_tx.setXY(24, 17);
     back_tx.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     back_tx.setLinespacing(0);
     back_tx.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NZLA));
     add(back_tx);
+
+    stop_tx.setXY(18, 48);
+    stop_tx.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    stop_tx.setLinespacing(0);
+    stop_tx.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4E9F));
+    add(stop_tx);
 
     container00.setPosition(14, 84, 50, 50);
     add(container00);
@@ -274,6 +287,56 @@ Screen2ViewBase::Screen2ViewBase() :
     gameOverText.setTypedText(touchgfx::TypedText(T___SINGLEUSE_85HI));
     gameOverText.setVisible(false);
     add(gameOverText);
+
+    PauseMenuContainer.setPosition(2, 0, 240, 320);
+    PauseMenuContainer.setVisible(false);
+    box35.setPosition(0, -1, 240, 320);
+    box35.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    box35.setAlpha(128);
+    box35.setVisible(false);
+    PauseMenuContainer.add(box35);
+
+    Resume.setXY(0, 132);
+    Resume.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_PRESSED_ID));
+    PauseMenuContainer.add(Resume);
+
+    Save.setXY(0, 203);
+    Save.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_PRESSED_ID));
+    PauseMenuContainer.add(Save);
+
+    Menu.setXY(0, 269);
+    Menu.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_50_MEDIUM_ROUNDED_PRESSED_ID));
+    PauseMenuContainer.add(Menu);
+
+    textArea1.setXY(77, 145);
+    textArea1.setColor(touchgfx::Color::getColorFromRGB(33, 31, 31));
+    textArea1.setLinespacing(0);
+    textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Q7BL));
+    PauseMenuContainer.add(textArea1);
+
+    textArea1_2.setPosition(74, 50, 93, 27);
+    textArea1_2.setColor(touchgfx::Color::getColorFromRGB(13, 12, 12));
+    textArea1_2.setLinespacing(0);
+    textArea1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YMOU));
+    PauseMenuContainer.add(textArea1_2);
+
+    textArea1_1.setXY(93, 216);
+    textArea1_1.setColor(touchgfx::Color::getColorFromRGB(33, 31, 31));
+    textArea1_1.setLinespacing(0);
+    textArea1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0OQ3));
+    PauseMenuContainer.add(textArea1_1);
+
+    textArea1_1_1.setXY(90, 282);
+    textArea1_1_1.setColor(touchgfx::Color::getColorFromRGB(33, 31, 31));
+    textArea1_1_1.setLinespacing(0);
+    textArea1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_RXV0));
+    PauseMenuContainer.add(textArea1_1_1);
+
+    add(PauseMenuContainer);
+
+    Stop.setXY(345, 145);
+    Stop.setBitmaps(touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_NORMAL_ID), touchgfx::Bitmap(BITMAP_ALTERNATE_THEME_IMAGES_WIDGETS_BUTTON_REGULAR_HEIGHT_36_TINY_ROUNDED_PRESSED_ID));
+    add(Stop);
 }
 
 Screen2ViewBase::~Screen2ViewBase()
